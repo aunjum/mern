@@ -1,0 +1,36 @@
+.settingsSidebar-wrapper {
+    width: 20rem;
+    padding: 5px;
+    /* background-color: red; */
+  }
+  
+  .settingsSidebar-header {
+    margin-top: 1rem;
+    display: flex;
+    padding: 1rem;
+    justify-content: space-between;
+  }
+  
+  .settingsSidebar-header > div:nth-child(1) {
+    font-size: 1.5rem;
+    font-weight: bold;
+    /* line-height: 1.5; */
+  }
+  .settingsSidebar-header > div:nth-child(2) {
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1.5;
+  }
+  
+  .settingsSidebar-close-btn {
+    cursor: pointer;
+  }
+  
+  .settingsSidebar-translation-btn-group {
+    width: 20rem;
+  }
+  
+  .settingsSidebar-translation-btn-group > button {
+    width: 100%;
+  }
+  

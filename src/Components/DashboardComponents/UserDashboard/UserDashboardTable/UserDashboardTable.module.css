@@ -1,0 +1,21 @@
+.adminDashboardTable-header{
+    background-color: red;
+    color: blue;
+    font-weight: bold;
+}
+.status-wraper{
+    font-weight: bold;
+    color:white;
+    background-color: gray;
+    margin:50px;
+    border-radius: 10px;
+    padding:3px 10px;
+}
+
+.organization-button-control{
+    margin-bottom: 10px;
+}
+
+.menu-item-style-button{
+    background-color: red;
+}

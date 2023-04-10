@@ -1,0 +1,23 @@
+.welcome-panel-wrapper {
+    height: calc(100vh - 2rem);
+    overflow-x: hidden;
+    /* background-color: black; */
+  }
+  
+  .welcome-login-reg-side-wrapper {
+    display: grid;
+    justify-content: center;
+    width: 50vw;
+    /* background-color: red; */
+  }
+  
+  /* .registration-lottie-wrapper {
+    width: 5rem;
+  } */
+  
+  @media screen and (max-width: 920px) {
+    .registration-lottie-wrapper {
+      display: none;
+    }
+  }
+  

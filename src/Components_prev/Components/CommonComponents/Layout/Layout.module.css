@@ -1,0 +1,21 @@
+.main-body-wrapper {
+    background-color: #f5f6f8;
+    display: flex;
+    height: 100vh;
+  }
+  
+  .main-body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+  }
+  
+  
+  .pageLayout-loading-spinner{
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    
+  }

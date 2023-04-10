@@ -1,0 +1,401 @@
+import React, {useState, useEffect, useRef} from 'react'
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import styles from './UserDashboardTable.module.css';
+import CreateOrganization from '../../../OrganizationComponents/CreateOrganization';
+import OrganaizationModal from '../../../OrganizationComponents/OrganizationModal';
+import FetchAllOrganizationApiHandler from '../../../OrganizationComponents/CreateOrganization/OrganizationApi/FetchAllOrganizationApiHandler';
+import ProjectModal from '../../../ProjectComponents/ProjectModal';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+
+import Papa from 'papaparse';
+import QrCodePdfDownload from './QrCodePdf';
+import {PDFDownloadLink} from "@react-pdf/renderer";
+import SummaryPdfDownload from './SummaryPdf';
+import MobileQrCodePdfDownload from './MobileQrCodePdf';
+import QrTagPdfDownload from './QrTagpdf';
+  
+function createData(id, projectName, registrationDate,numberofTracking, numberTracked,trackedCount,numberofDevice) {
+  return { id, projectName, registrationDate,numberofTracking, numberTracked,trackedCount,numberofDevice };
+}
+  
+const rows = [
+  createData('6389bb8d739d2bcc55638e42','Project-HP3', '2022-10-10 18:53:09', "9", "1","0","3"),
+  createData('5389bb8d739d2bcc55638e42','ETTMS-V1-TEST', '2022-10-10 18:53:09', "3", "7","2","2"),
+  createData('6389bb8d739d2bcc55638e42','ETTMS-V2-TEST', '2022-10-10 18:53:09', "5", "1","7","6"),
+  createData('6389bb8d739d2bcc55638e42','ETTMS-V3-TEST', '2022-10-10 18:53:09', "2", "2","1","3"),
+  createData('6389bb8d739d2bcc55638e42','ETTMS-V4-TEST', '2022-10-10 18:53:09', "7", "3","9","6")
+];
+
+const UserDashboardTable = () => {
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [dashboardData, setDashboardData] = useState(null);
+    //console.log(dashboardData);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+      console.log(anchorEl);
+    };
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+
+    const [renderePDF_link, setRenderePDF_link] = useState(false);
+    let isButtonClicked = false;
+    var today = new Date();
+  /* Create Track Id List In CSV Starts */
+  const handleCreateTrackingIdList = async () => {
+    // Make a GET request to the API
+    //const response = await fetch('http://localhost:3004/csv');
+    const response = await fetch('https://tracktest.ultra-x.jp/backend/projects/showAllActiveDevicesOfFollowingProject', {
+      method: 'POST',
+      body: JSON.stringify({
+        project_id : "63883ad749dfc5359f25fe82"
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      }
+    });
+    const data = await response.json();
+    console.log(data);
+    // Convert the data into an array of objects
+    // csv -> data
+    const rows = data?.body?.map(item => {
+      return {
+        TrackID: item.track,
+        DeviceVendor: item.vendor,
+        DeviceModel: item.model,
+        DeviceSerial: item.serial,
+        Memo: item.state
+      };
+    });
+    // Convert the array of objects into a CSV string
+    const csv = Papa.unparse(rows);
+    // Create a URL that points to the CSV string
+    const url = window.URL.createObjectURL(new Blob([csv]));
+    // Create a link that allows the user to download the CSV file
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'projectName'+'_TRACKID_LIST.csv';
+    link.click();
+  }
+  /* Create Track Id List In CSV Ends */
+
+  /* Create QR Code List In PDF Starts*/
+  const [pdfData, setPdfData] = useState(null);
+  const btnDownloadTrackingQrPDFAuto = useRef(null);
+  const handleCreateTrackingQrCodeList = async () => {
+    const response = await fetch('http://localhost:3004/qrCode');
+    const _pdfData = await response.json();
+    //console.log(_pdfData);
+    console.log("pdf result: ", {
+      adecPDF_resultFtromAPI: response,
+      _pdfData
+    });
+    setPdfData(_pdfData?.data);
+    setRenderePDF_link((prevvalue) => {
+      setTimeout(() => {
+        if(!isButtonClicked) {
+          console.log('Auto click worked', {
+            btnProperty: btnDownloadTrackingQrPDFAuto.current
+          });
+          btnDownloadTrackingQrPDFAuto.current.click();
+          isButtonClicked = !isButtonClicked;
+          setTimeout(() => {
+            setRenderePDF_link((prevvalue) => {
+              if(prevvalue) {
+                isButtonClicked = false;
+                return false;
+              }
+            });
+          }, 3000);
+        }
+      }, 3000)
+      return true;
+    });
+  }
+  /* Create QR Code List In PDF Ends*/
+
+  /* Create QR Code Tag List In PDF Starts*/
+  const btnDownloadQrtagPDFAuto = useRef(null);
+  const [qrTagPdfData, setQrTagPdfData] = useState(null);
+  const handleCreateQrTagPdf = async () => {
+    const response = await fetch('http://localhost:3004/qrCode');
+    const _pdfData = await response.json();
+    setQrTagPdfData(_pdfData?.data);
+    setRenderePDF_link((prevvalue) => {
+      setTimeout(() => {
+        if(!isButtonClicked) {
+          console.log('Auto click worked', {
+            btnProperty: btnDownloadQrtagPDFAuto.current
+          });
+          btnDownloadQrtagPDFAuto.current.click();
+          isButtonClicked = !isButtonClicked;
+          setTimeout(() => {
+            setRenderePDF_link((prevvalue) => {
+              if(prevvalue) {
+                isButtonClicked = false;
+                return false;
+              }
+            });
+          }, 3000);
+        }
+      }, 3000)
+      return true;
+    });
+  }
+  /* Create QR Code Tag List PDF Ends*/
+
+  /* Create QR Code List For mobile  In PDF Starts*/
+  const btnDownloadTrackingQrMobilePDFAuto = useRef(null);
+  const [mobilePdfData, setMobilePdfData] = useState(null);
+  const handleCreateTrackingQrMobilePdf = async () => {
+    const response = await fetch('http://localhost:3004/qrCode');
+    const _pdfData = await response.json();
+    setMobilePdfData(_pdfData?.data);
+    setRenderePDF_link((prevvalue) => {
+      setTimeout(() => {
+        if(!isButtonClicked) {
+          console.log('Auto click worked', {
+            btnProperty: btnDownloadTrackingQrMobilePDFAuto.current
+          });
+          btnDownloadTrackingQrMobilePDFAuto.current.click();
+          isButtonClicked = !isButtonClicked;
+          setTimeout(() => {
+            setRenderePDF_link((prevvalue) => {
+              if(prevvalue) {
+                isButtonClicked = false;
+                return false;
+              }
+            });
+          }, 3000);
+        }
+      }, 3000)
+      return true;
+    });
+  }
+  /* Create QR Code List For mobile In PDF Ends*/
+
+  /*create summary download starts*/
+  const btnSummaryDownloadPDFAuto = useRef(null);
+  const [summaryPdfData, setSummaryPdfData] = useState(null);
+  const [name, setName] = useState(null);
+  const handleSummaryPdfDownload = async (e, pn) =>{
+    setName(pn);
+    const response = await fetch('http://localhost:3004/projectSummary');
+    const _pdfData = await response.json();
+    setSummaryPdfData(_pdfData?.data);
+    setRenderePDF_link((prevvalue) => {
+      setTimeout(() => {
+        if(!isButtonClicked) {
+          console.log('Auto click worked', {
+            btnProperty: btnSummaryDownloadPDFAuto.current
+          });
+          btnSummaryDownloadPDFAuto.current.click();
+          isButtonClicked = !isButtonClicked;
+          setTimeout(() => {
+            setRenderePDF_link((prevvalue) => {
+              if(prevvalue) {
+                isButtonClicked = false;
+                return false;
+              }
+            });
+          }, 3000);
+        }
+      }, 3000)
+      return true;
+    });
+  }
+  /*create summary download ends*/
+
+    useEffect(()=>{
+      const FetchData = async() => {
+        const response = await fetch('http://localhost:3004/userDashboardTable');
+        const dashData = await response.json();
+        setDashboardData(dashData);
+      }
+      FetchData()
+    },[])
+  
+    const handleChangePage = (event, newPage) => {
+      setPage(newPage);
+    };
+  
+    const handleChangeRowsPerPage = (event) => {
+      setRowsPerPage(+event.target.value);
+      setPage(0);
+    };
+  
+  return (
+    <>
+    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <div>
+      {/* <Button variant="contained">Create Organization</Button> */}
+    
+      <ProjectModal/>
+      </div>
+       <TableContainer  sx={{ maxHeight: 345 }}>
+      <Table  stickyHeader aria-label="sticky table">
+        <TableHead>
+          <TableRow>
+            <TableCell  style={{backgroundColor: ' rgb(203, 200, 200)', fontWeight:'bold'}} align="center">Project Name</TableCell>
+            <TableCell  style={{backgroundColor: ' rgb(203, 200, 200)', fontWeight:'bold'}} align="center">Created At</TableCell>
+            <TableCell  style={{backgroundColor: ' rgb(203, 200, 200)', fontWeight:'bold'}} align="center">Number of Tracking ID</TableCell>
+            <TableCell  style={{backgroundColor: ' rgb(203, 200, 200)', fontWeight:'bold'}} align="center">Number Tracked</TableCell>
+            <TableCell  style={{backgroundColor: ' rgb(203, 200, 200)', fontWeight:'bold'}} align="center">Tracked Count</TableCell>
+            <TableCell  style={{backgroundColor: ' rgb(203, 200, 200)', fontWeight:'bold'}} align="center">Number of Device</TableCell>
+            <TableCell  style={{backgroundColor: ' rgb(203, 200, 200)', fontWeight:'bold'}} align="center">Action</TableCell>
+            <TableCell  style={{backgroundColor: ' rgb(203, 200, 200)', fontWeight:'bold'}} align="center">Project Summary</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {dashboardData?.data?.map((row) => (
+            <TableRow
+              key={row.id}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row" align="center">{row.projectName}</TableCell>
+              <TableCell align="center">{row.registrationDate}</TableCell>
+              <TableCell align="center">{row.numberofTracking}</TableCell>
+              <TableCell align="center">{row.numberTracked}</TableCell>
+              <TableCell align="center">{row.trackedCount}</TableCell>
+              <TableCell align="center">{row.numberofDevice}</TableCell>
+              
+                <TableCell align="center">
+                <div>
+      <Button
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+        variant="contained"
+      >
+        Action
+        <ArrowDropDownIcon/>
+      </Button>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <div style={{display:'block'}}>
+
+        <Button variant="contained" style={{margin:'10px',display:'block'}}
+        onClick={handleCreateTrackingIdList}>
+          Creating Tracking ID List
+        </Button>
+
+        <Button variant="contained" style={{margin:'10px',display:'block'}} 
+        onClick={handleCreateTrackingQrCodeList}>
+          Creating Tracking QR Code List
+        </Button>
+          {
+            renderePDF_link &&
+              <PDFDownloadLink
+                document={<QrCodePdfDownload pdfData={pdfData}/>}
+                fileName={`${row.projectName}`+`_MANAGE_QR_LIST.pdf`}>
+                {
+                  <Button ref={btnDownloadTrackingQrPDFAuto}></Button>
+                }
+              </PDFDownloadLink>
+          }
+
+        <Button 
+        variant="contained" style={{margin:'10px',display:'block'}} 
+        onClick={handleCreateQrTagPdf}>Creating Tracking QR Tag
+        </Button>
+        {
+            renderePDF_link &&
+              <PDFDownloadLink
+                document={<QrTagPdfDownload qrTagPdfData={qrTagPdfData}/>}
+                fileName={`${row.projectName}`+`_QR_MOBILE_LIST.pdf`}>
+                {
+                  <Button ref={btnDownloadQrtagPDFAuto}></Button>
+                }
+              </PDFDownloadLink>
+          }
+
+        <Button 
+        variant="contained" 
+        style={{margin:'10px',display:'block'}} 
+        onClick={handleCreateTrackingQrMobilePdf}>Creating Tracking QR List(For Mobile)
+        </Button>
+        {
+            renderePDF_link &&
+              <PDFDownloadLink
+                document={<MobileQrCodePdfDownload mobilePdfData={mobilePdfData}/>}
+                fileName={`${row.projectName}`+`_QR_MOBILE_LIST.pdf`}>
+                {
+                  <Button ref={btnDownloadTrackingQrMobilePDFAuto}></Button>
+                }
+              </PDFDownloadLink>
+          }
+        </div>
+      </Menu>
+    </div>
+   
+                  </TableCell>
+                  <TableCell align="center">
+
+   <Stack justifyContent="center" spacing={2} direction="row">
+      <Button 
+      variant="contained" 
+      onClick={(e) => {
+        handleSummaryPdfDownload(e, row.projectName)
+      }}
+      >
+        Download
+      </Button>
+        {
+            renderePDF_link &&
+              <PDFDownloadLink
+                document={<SummaryPdfDownload summaryPdfData={summaryPdfData} pn={`${row.projectName}`}/>}
+                fileName={`${row.name}_${Date.now()}.pdf`}>
+                {
+                  <Button ref={btnSummaryDownloadPDFAuto}></Button>
+                }
+              </PDFDownloadLink>
+        }
+    </Stack>
+                  </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={dashboardData?.data?.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Paper>
+    </>
+  )
+}
+
+export default UserDashboardTable
+

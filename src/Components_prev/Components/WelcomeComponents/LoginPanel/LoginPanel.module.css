@@ -1,0 +1,92 @@
+.login-wrapper {
+    border-radius: 10px;
+    box-shadow: -1px 0px 5px 1px rgba(0, 0, 0, 0.53);
+    -webkit-box-shadow: -1px 0px 5px 1px rgba(0, 0, 0, 0.53);
+    -moz-box-shadow: -1px 0px 5px 1px rgba(0, 0, 0, 0.53);
+    text-align: center;
+    display: grid;
+    justify-content: center;
+    width: 20rem;
+  
+    padding: 1rem;
+    animation: backInLeft 0.5s;
+  }
+  
+  @keyframes backInLeft {
+    0% {
+      transform: translateX(-200px) scale(0.2);
+      opacity: 0.7;
+    }
+  
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  .backInLeft {
+    animation-name: backInLeft;
+  }
+  
+  .login-header {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .login-forget-password-field {
+    opacity: 0.5;
+    cursor: pointer;
+    transition: all 0.3s linear;
+  }
+  .login-forget-password-field:hover {
+    opacity: 1;
+    text-decoration: underline;
+    color: red;
+  }
+  
+  .login-forget-password {
+    opacity: 0.5;
+    transition: all 0.3s linear;
+  }
+  .login-forget-password:hover {
+    opacity: 1;
+    text-decoration: underline;
+    cursor: pointer;
+    color: red;
+  }
+  
+  #login-in-btn {
+    width: 50%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 25%;
+  }
+  
+  .error{
+    color: red;
+  }
+
+  .welcome-panel-wrapper {
+    height: calc(100vh - 2rem);
+    overflow-x: hidden;
+    /* background-color: black; */
+  }
+  
+  .welcome-login-reg-side-wrapper {
+    display: grid;
+    justify-content: center;
+    width: 50vw;
+    /* background-color: red; */
+  }
+  
+  /* .registration-lottie-wrapper {
+    width: 5rem;
+  } */
+  
+  @media screen and (max-width: 920px) {
+    .registration-lottie-wrapper {
+      display: none;
+    }
+  }
+  
+  

@@ -1,0 +1,97 @@
+.adminDashboardTable-header{
+    background-color: blue;
+    font-weight: bold;
+}
+.status-wraper{
+    font-weight: bold;
+    color:white;
+    background-color: gray;
+    margin:50px;
+    border-radius: 10px;
+    padding:3px 10px;
+}
+
+.trackRegistrationButton{
+    color: white !important;
+    background-color: rgb(91, 4, 4) !important;
+    font-size: 12px !important;
+    padding: 10px !important;
+    border: 2px !important;
+    border-radius: 5px !important;
+    word-wrap: break-word !important; 
+    width: 250px !important;
+
+}
+
+.trackInformationRegistrationButton{
+    color: white !important;
+    background-color: rgb(9, 0, 129) !important;
+    font-size: 12px !important;
+    padding: 10px !important;
+    border: 2px !important;
+    border-radius: 5px !important;
+    word-wrap: break-word !important; 
+    width: 250px !important;
+
+}
+
+.deviceInformationRegistrationButton{
+    color: white !important;
+    background-color: rgb(76, 65, 237) !important;
+    font-size: 12px !important;
+    padding: 5px !important;
+    border: 2px !important;
+    border-radius: 5px !important;
+    word-wrap: break-word !important; 
+    width: 250px !important;
+
+}
+
+.adminDashboardTable-header{
+    background-color: blue;
+    font-weight: bold;
+}
+.status-wraper{
+    font-weight: bold;
+    color:white;
+    background-color: gray;
+    margin:50px;
+    border-radius: 10px;
+    padding:3px 10px;
+}
+
+.trackRegistrationButton{
+    color: white !important;
+    background-color: rgb(91, 4, 4) !important;
+    font-size: 12px !important;
+    padding: 10px !important;
+    border: 2px !important;
+    border-radius: 5px !important;
+    word-wrap: break-word !important; 
+    width: 250px !important;
+
+}
+
+.trackInformationRegistrationButton{
+    color: white !important;
+    background-color: rgb(9, 0, 129) !important;
+    font-size: 12px !important;
+    padding: 10px !important;
+    border: 2px !important;
+    border-radius: 5px !important;
+    word-wrap: break-word !important; 
+    width: 250px !important;
+
+}
+
+.deviceInformationRegistrationButton{
+    color: white !important;
+    background-color: rgb(76, 65, 237) !important;
+    font-size: 12px !important;
+    padding: 5px !important;
+    border: 2px !important;
+    border-radius: 5px !important;
+    word-wrap: break-word !important; 
+    width: 250px !important;
+
+}

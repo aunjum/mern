@@ -1,0 +1,84 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#sidebar .pro-sidebar .pro-sidebar-inner {
+  background-color: #ffffff;
+  color: #334d6e;
+  /* transition: all 3s linear; */
+  -webkit-box-shadow: 4px -1px 5px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 4px -1px 5px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 4px -1px 5px 0px rgba(0, 0, 0, 0.15);
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+#sidebar
+  .pro-sidebar
+  .pro-menu.shaped
+  .pro-menu-item
+  > .pro-inner-item
+  > .pro-icon-wrapper {
+  background-color: transparent;
+}
+#sidebar .pro-sidebar .pro-menu.shaped .pro-menu-item .pro-inner-list-item {
+  background-color: transparent;
+}
+
+/* #sidebar .pro-sidebar .collapsed {
+  background-color: rgb(239, 220, 220);
+} */
+/* #sidebar .co */
+/* Settings right sidebar global css */
+.MuiDrawer-root > .MuiDrawer-paperAnchorRight {
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  /* background-color: red; */
+}
+
+.pro-sidebar.collapsed
+  .pro-menu
+  > ul
+  > .pro-menu-item.pro-sub-menu
+  > .pro-inner-list-item
+  > .popper-inner {
+  background-color: #ffffff !important;
+  box-shadow: -1px 1px 5px 2px rgba(0, 0, 0, 0.29);
+  -webkit-box-shadow: -1px 1px 5px 2px rgba(0, 0, 0, 0.29);
+  -moz-box-shadow: -1px 1px 5px 2px rgba(0, 0, 0, 0.29);
+}
+

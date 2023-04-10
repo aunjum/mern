@@ -1,0 +1,56 @@
+import React,{useEffect} from 'react'
+import Layout from '../../CommonComponents/Layout'
+import styles from "./UserDashboard.module.css"
+import { useNavigate } from 'react-router-dom'
+import UserDashboardStatus from './UserDashboardStatus'
+import UserDashboardTable from './UserDashboardTable'
+import LocalDBCreate from './UserDashboardTable/Components/LocalDBCreate'
+
+const UserDashboard = () => {
+  const navigate = useNavigate();
+  useEffect(()=>{
+    // check internet and server connection
+    if (navigator.onLine) {
+      console.log('🟢 You are online')
+
+      fetch('https://tracktest.ultra-x.jp/backend/test').then(response => {
+
+      if (response.ok) {
+        console.log('🟢 Server is running')
+      } else {
+          alert('🔴 Server is not responding')
+      }
+    })
+    .catch(error => 
+        alert('🔴 Server is not responding')
+    );
+    } else {
+        alert('🔴 Please check your internet connection')
+    }
+    // create and check local db connection
+    LocalDBCreate();
+
+
+    if(!localStorage.getItem('access_token'))
+    {
+        navigate('/')
+    }
+  },[navigate])
+  return (
+    <>
+    <Layout>
+    <div className={styles[`adminDashboard-wrapper`]}>
+      <div>
+       <UserDashboardStatus/>
+      </div>
+    <div className={styles["adminDashboardTable-wraper"]}>
+      <UserDashboardTable/>
+    </div>
+    </div>
+    </Layout>
+
+    </>
+  )
+}
+
+export default UserDashboard

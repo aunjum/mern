@@ -1,0 +1,28 @@
+.adminDashboard-wrapper {
+    height: 80vh;
+    overflow-y: auto;
+    padding-top: 1rem;
+    width: calc(100% - 1rem);
+    background-color: #ffffff;
+    margin: 1rem;
+    /* overflow: hidden; */
+    -webkit-box-shadow: -2px -2px 5px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: -2px -2px 5px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: -2px -2px 5px 0px rgba(0, 0, 0, 0.15);
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+  }
+
+  .adminDashboardTable-wraper{
+    margin-top: 2%;
+    margin-left: 3%;
+    margin-right: 3%;
+  }
+  .verticalChartAlign{
+    background-color: greenyellow;
+    height: 800px;
+  }
+  .recordHeaderCenter{
+    text-align: center;
+  }
+  

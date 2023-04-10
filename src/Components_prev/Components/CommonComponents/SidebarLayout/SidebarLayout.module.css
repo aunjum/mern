@@ -1,0 +1,50 @@
+.prosidebar-main {
+  background-color: red;
+}
+.proSidebar-bgColor{
+  background-color: blue !important;
+}
+.sidebar-header-wrapper{
+  cursor: pointer;
+}
+.sideabar-header{
+    display: grid;
+  place-items: center;
+}
+
+.sidebar-toggle-btn{
+    display: grid;
+  place-items: center;
+}
+
+.sidebar-content{
+  /* height: 20%; */
+  overflow-y: auto;
+  overflow-x: hidden;
+
+}
+
+
+.sidebar-footer {
+ z-index: 9999;
+}
+.sidebar-footer-menu {
+  transition: all 3s linear;
+}
+
+.sidebar-footer-menu-open {
+  display: grid;
+  place-items: center;
+  /* transform: translate(-50%); */
+}
+
+.active-sidebar-menu-icon{
+    color: #109CF1;
+}
+
+.active-side-menu {
+  /* background-color: #0b0909d2; */
+  color: #109CF1;
+}
+
+

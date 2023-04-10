@@ -1,0 +1,28 @@
+.trackBoard-wrapper {
+  height: 80vh;
+  overflow-y: none;
+  overflow-x: none;
+  padding-top: 1rem;
+  width: calc(100% - 1rem);
+  background-color: #ffffff;
+  margin: 1rem;
+  /* overflow: hidden; */
+  -webkit-box-shadow: -2px -2px 5px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: -2px -2px 5px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: -2px -2px 5px 0px rgba(0, 0, 0, 0.15);
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.trackBoardTable-wraper{
+  margin-top: 0px;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-bottom: 1%;
+  /* height: 530px; */
+  /* width: 1180px; */
+  width: calc(100% - 1rem);
+  /* max-height: 600px; */
+  max-width: 1200px;
+  overflow-y: none;
+}

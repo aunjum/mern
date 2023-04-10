@@ -1,0 +1,39 @@
+.charts-wrapper{
+    height: 80vh;
+    max-height: 80vh;
+    /* max-height: 1000px; */
+    overflow-y: auto;
+    width: calc(100% - 1rem);
+    background-color: #ffffff;
+    margin: 1rem;
+    /* overflow: hidden; */
+    -webkit-box-shadow: -2px -2px 5px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: -2px -2px 5px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: -2px -2px 5px 0px rgba(0, 0, 0, 0.15);
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+}
+
+.horizontalChart{
+    height: auto;
+    overflow-x: hidden;
+    margin:20px;
+    padding: 20px;
+    width: auto;
+}
+
+.barChart{
+    height: auto;
+    overflow-x: hidden;
+    margin:20px;
+    padding: 20px;
+    width: auto;
+}
+
+.pieChart{
+    height: auto;
+    overflow-x: hidden;
+    margin:20px;
+    padding: 20px;
+    width: auto;
+}

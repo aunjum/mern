@@ -1,0 +1,74 @@
+.registration-wrapper {
+    border-radius: 10px;
+    box-shadow: -1px 0px 5px 1px rgba(0, 0, 0, 0.53);
+    -webkit-box-shadow: -1px 0px 5px 1px rgba(0, 0, 0, 0.53);
+    -moz-box-shadow: -1px 0px 5px 1px rgba(0, 0, 0, 0.53);
+    text-align: center;
+    display: grid;
+    justify-content: center;
+    width: 30rem;
+    padding: 1rem;
+    animation: backInRight 0.5s;
+  }
+  
+  @keyframes backInRight {
+    0% {
+      transform: translateX(200px) scale(0.2);
+      opacity: 0;
+    }
+  
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  .registration-header {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .registration-form {
+    width: 25vw;
+  }
+  
+  .registration-forget-password-field {
+    opacity: 0.5;
+    cursor: pointer;
+    transition: all 0.3s linear;
+  }
+  .registration-forget-password-field:hover {
+    opacity: 1;
+    text-decoration: underline;
+    color: red;
+  }
+  
+  #registration-in-btn {
+    width: 50%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 25%;
+  }
+  
+  .error{
+    color: red;
+  }
+
+  
+  .password-reset-email-success {
+    padding: 4px;
+    border-radius: 4px;
+    background-color: green;
+    color: white;
+  }
+  .password-reset-email-error {
+    padding: 4px;
+    border-radius: 4px;
+    background-color: red;
+    color: white;
+  }
+  
+
+  .organization-button-control{
+    margin-bottom: 10px;
+}
